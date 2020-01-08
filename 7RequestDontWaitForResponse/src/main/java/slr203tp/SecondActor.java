@@ -25,13 +25,13 @@ public class SecondActor extends UntypedAbstractActor {
     public void onReceive(Object message) throws Throwable {
         if (message instanceof RequestOne) {
             RequestOne request = (RequestOne) message;
+            log.info("[" + getSelf().path().name() + "] Received Request One: " + request.getMessage());
             getSender().tell(new ResponseOne("Hello, I'm B!"), getSelf());
             try { // L'acteur B va prends du temps à répondre pour permettre de voir que A ne lui attendra pas
                 waitBeforeResponding(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            log.info("[" + getSelf().path().name() + "] Received Request One: " + request.getMessage());
         }
         else if (message instanceof RequestTwo) {
             RequestTwo request = (RequestTwo) message;

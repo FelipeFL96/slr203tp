@@ -2,8 +2,7 @@ package slr203tp;
 
 import akka.actor.ActorSystem;
 import akka.actor.ActorRef;
-import slr203tp.messages.RequestOne;
-import slr203tp.messages.RequestTwo;
+import slr203tp.messages.Start;
 
 public class RequestDontWaitForResponse {
 
@@ -11,11 +10,10 @@ public class RequestDontWaitForResponse {
         
         final ActorSystem system = ActorSystem.create("system");
 
-        final ActorRef a = system.actorOf(FirstActor.createActor(), "a");
         final ActorRef b = system.actorOf(SecondActor.createActor(), "b");
+        final ActorRef a = system.actorOf(FirstActor.createActor(b), "a");
 
-        b.tell(new RequestOne("Hello, I'm A!"), a);
-        b.tell(new RequestTwo("How are you?"), a);
+        a.tell(new Start(), ActorRef.noSender());
 
         try {
             waitBeforeTerminate();
