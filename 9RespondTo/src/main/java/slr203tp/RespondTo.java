@@ -2,19 +2,18 @@ package slr203tp;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
-import slr203tp.messages.RespondToActor;
-import slr203tp.messages.Response;
+import slr203tp.messages.Start;
 
 public class RespondTo {
 
     public static void main(String[] args) {
         final ActorSystem system = ActorSystem.create("system");
 
-        final ActorRef a = system.actorOf(FirstActor.createActor(), "a");
-        final ActorRef b = system.actorOf(SecondActor.createActor(), "b");
         final ActorRef c = system.actorOf(ThirdActor.createActor(), "c");
+        final ActorRef b = system.actorOf(SecondActor.createActor(), "b");
+        final ActorRef a = system.actorOf(FirstActor.createActor(b, c), "a");
 
-        b.tell(new RespondToActor(a, c, new Response ("Hello! I'm A and I'm too shy to talk to you directly!")), a);
+        a.tell(new Start(), ActorRef.noSender());
 
         try {
             waitBeforeTerminate();
