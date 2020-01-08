@@ -10,26 +10,23 @@ import slr203tp.messages.TransmissionMessage;
 public class FirstActor extends UntypedAbstractActor {
 
     private ActorRef transmitter;
+    private ActorRef b;
 
-    public FirstActor(ActorRef transmitter) {
+    public FirstActor(ActorRef transmitter, ActorRef b) {
         this.transmitter = transmitter;
+        this.b = b;
     }
 
-    public static Props createActor(ActorRef transmitter) {
+    public static Props createActor(ActorRef transmitter, ActorRef b) {
         return Props.create(FirstActor.class, () -> {
-            return new FirstActor(transmitter);
+            return new FirstActor(transmitter, b);
         });
     }
 
     @Override
     public void onReceive(Object message) throws Throwable {
         if (message instanceof Start) {
-            Start received = (Start) message;
-            ActorRef b = received.getReceiver();
             transmitter.tell(new TransmissionMessage(new MyMessage("Olá!"), b), getSelf());
         }
     }
 }
-
-/* Parce que le but c'est d'avoir dix à la fin, c'est d'avoir le diplôme à la fin d'année. C'est pas d'avoir 20*/
-/* Traduzindo: cinco bola é dez */

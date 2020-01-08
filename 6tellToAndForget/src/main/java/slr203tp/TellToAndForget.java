@@ -13,10 +13,10 @@ public class TellToAndForget {
     final ActorSystem system = ActorSystem.create("system");
 
     final ActorRef transmitter = system.actorOf(Transmitter.createActor(), "transmitter");
-    final ActorRef a = system.actorOf(FirstActor.createActor(transmitter), "a");
     final ActorRef b = system.actorOf(SecondActor.createActor(), "b");
+    final ActorRef a = system.actorOf(FirstActor.createActor(transmitter, b), "a");
 
-    a.tell(new Start(b), ActorRef.noSender());
+    a.tell(new Start(), ActorRef.noSender());
 
     try {
       waitBeforeTerminate();
