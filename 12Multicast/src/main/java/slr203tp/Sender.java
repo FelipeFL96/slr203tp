@@ -15,26 +15,24 @@ public class Sender extends UntypedAbstractActor {
 
     private LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
     
-    private ActorRef multicaster;
+    private ActorRef multicaster, receiver1, receiver2, receiver3;
 
-    public Sender(ActorRef multicaster) {
+    public Sender(ActorRef multicaster, ActorRef receiver1, ActorRef receiver2, ActorRef receiver3) {
         this.multicaster = multicaster;
+        this.receiver1 = receiver1;
+        this.receiver2 = receiver2;
+        this.receiver3 = receiver3;
     }
 
-    public static Props createActor(ActorRef multicaster) {
+    public static Props createActor(ActorRef multicaster, ActorRef receiver1, ActorRef receiver2, ActorRef receiver3) {
         return Props.create(Sender.class, () -> {
-            return new Sender(multicaster);
+            return new Sender(multicaster, receiver1, receiver2, receiver3);
         });
     }
 
     @Override
     public void onReceive(Object message) throws Throwable {
         if (message instanceof Start) {
-            Start received = (Start) message;
-            ActorRef receiver1 = received.getReceiver1();
-            ActorRef receiver2 = received.getReceiver2();
-            ActorRef receiver3 = received.getReceiver3();
-            
             Group group1 = new Group();
             group1.addMember(receiver1);
             group1.addMember(receiver2);

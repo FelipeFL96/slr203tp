@@ -10,12 +10,12 @@ public class Multicast {
         final ActorSystem system = ActorSystem.create("system");
 
         final ActorRef multicaster = system.actorOf(Multicaster.createActor(), "multicaster");
-        final ActorRef sender = system.actorOf(Sender.createActor(multicaster), "sender");
         final ActorRef receiver1 = system.actorOf(Receiver.createActor(), "receiver1");
         final ActorRef receiver2 = system.actorOf(Receiver.createActor(), "receiver2");
         final ActorRef receiver3 = system.actorOf(Receiver.createActor(), "receiver3");
+        final ActorRef sender = system.actorOf(Sender.createActor(multicaster, receiver1, receiver2, receiver3), "sender");
 
-        sender.tell(new Start(receiver1, receiver2, receiver3), ActorRef.noSender());
+        sender.tell(new Start(), ActorRef.noSender());
 
         try {
             waitBeforeTerminate();
