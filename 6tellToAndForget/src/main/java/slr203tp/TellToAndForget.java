@@ -2,10 +2,9 @@ package slr203tp;
 
 import akka.actor.ActorSystem;
 import akka.actor.ActorRef;
-import slr203tp.messages.TransmissionMessage;
-import slr203tp.messages.MyMessage;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
+import slr203tp.messages.Start;
 
 public class TellToAndForget {
 
@@ -13,12 +12,11 @@ public class TellToAndForget {
 
     final ActorSystem system = ActorSystem.create("system");
 
-    final ActorRef a = system.actorOf(FirstActor.createActor(), "a");
-    final ActorRef b = system.actorOf(SecondActor.createActor(), "b");
     final ActorRef transmitter = system.actorOf(Transmitter.createActor(), "transmitter");
+    final ActorRef a = system.actorOf(FirstActor.createActor(transmitter), "a");
+    final ActorRef b = system.actorOf(SecondActor.createActor(), "b");
 
-    TransmissionMessage message = new TransmissionMessage("Olá!", b);
-    transmitter.tell(message, a);
+    a.tell(new Start(b), ActorRef.noSender());
 
     try {
       waitBeforeTerminate();

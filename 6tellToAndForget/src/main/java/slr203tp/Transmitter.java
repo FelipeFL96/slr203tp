@@ -11,8 +11,6 @@ import akka.event.LoggingAdapter;
 public class Transmitter extends UntypedAbstractActor {
 
     private LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
-    private TransmissionMessage transMessage;
-    private ActorRef receiver;
 
     public Transmitter() {}
 
@@ -27,10 +25,9 @@ public class Transmitter extends UntypedAbstractActor {
         if (message instanceof TransmissionMessage) {
             log.info("[" + getSelf().path().name() + "] Message being Transmitted");
             log.info("[" + getSelf().path().name() + "] Source: " + getSender().path().name());
-            this.transMessage = (TransmissionMessage) message;
-            receiver = transMessage.getReceiver();
-            log.info("[" + getSelf().path().name() + "] Destination: " + receiver.path().name());
-            receiver.tell(new MyMessage(transMessage.getMessage()), getSender());
+            TransmissionMessage transMessage = (TransmissionMessage) message;
+            log.info("[" + getSelf().path().name() + "] Destination: " + transMessage.getReceiver().path().name());
+            transMessage.getReceiver().tell(transMessage.getMessage(), getSender());
         }
     }
 

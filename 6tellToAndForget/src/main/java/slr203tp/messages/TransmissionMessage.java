@@ -5,15 +5,15 @@ import akka.actor.ActorRef;
 
 public class TransmissionMessage implements Serializable {
 
-    public final String message;
+    public final Object message;
     public ActorRef receiver;
 
-    public TransmissionMessage(String message, ActorRef actorRef) {
+    public TransmissionMessage(Object message, ActorRef actorRef) {
         this.message = message;
         this.receiver = actorRef;
     }
 
-    public String getMessage() {
+    public Object getMessage() {
         return message;
     }
 
