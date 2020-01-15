@@ -46,9 +46,19 @@ public class Supervisor extends UntypedAbstractActor {
                 }
                 actors.get(i).tell(list, getSelf());
             }
-
+            
+            wait(2000);
+            System.out.println("\n\n\n");
+            log.info("Execution with out cycles");
+            actors.get(0).tell(new Flood("System Information"), getSelf());
             wait(2000);
 
+            System.out.println("\n\n\n");
+            log.info("Execution with a cycle");
+            ActorsList list = new ActorsList();
+            list.addActor(actors.get(2));
+            actors.get(4).tell(list, getSelf());
+            wait(4000);
             actors.get(0).tell(new Flood("System Information"), getSelf());
 
         }

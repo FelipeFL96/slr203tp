@@ -4,7 +4,7 @@ import akka.actor.ActorSystem;
 import akka.actor.ActorRef;
 import slr203tp.messages.Topology;
 
-public class UncontrolledFloodingWithoutCycle {
+public class UncontrolledFlooding {
 
     public static void main(String[] args) {
         final ActorSystem system = ActorSystem.create("system");
@@ -14,7 +14,7 @@ public class UncontrolledFloodingWithoutCycle {
             {0, 0, 0, 1, 0}, 
             {0, 0, 0, 1, 0}, 
             {0, 0, 0, 0, 1},
-            {0, 0, 1, 0, 0}
+            {0, 0, 0, 0, 0}
         };
 
         final ActorRef supervisor = system.actorOf(Supervisor.createActor(actorLinks), "sup");
