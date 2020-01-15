@@ -6,7 +6,6 @@ import akka.actor.ActorRef;
 import akka.actor.UntypedAbstractActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
-import slr203tp.messages.Start;
 import slr203tp.messages.Message;
 import slr203tp.messages.ActorsList;
 
@@ -15,7 +14,9 @@ public class SampleActor extends UntypedAbstractActor {
     private LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
     private ArrayList<ActorRef> knownActors;
     
-    public SampleActor() {}
+    public SampleActor() {
+        this.knownActors = new ArrayList<ActorRef>();
+    }
 
     public static Props createActor() {
         return Props.create(SampleActor.class, () -> {
@@ -31,9 +32,9 @@ public class SampleActor extends UntypedAbstractActor {
         }
         else if (message instanceof ActorsList) {
             ActorsList received = (ActorsList) message;
-            this.knownActors = received.getActorsList();
 
-            for (ActorRef actor : knownActors) {
+            for (ActorRef actor : received.getActorsList()) {
+                this.knownActors.add(actor);
                 log.info("[" + getSelf().path().name() + "] actor registered: " + actor.path().name());
             }
         }

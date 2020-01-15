@@ -2,7 +2,7 @@ package slr203tp;
 
 import akka.actor.ActorSystem;
 import akka.actor.ActorRef;
-import slr203tp.messages.Start;
+import slr203tp.messages.Topology;
 
 public class CommunicationTopologyCreation {
 
@@ -10,15 +10,16 @@ public class CommunicationTopologyCreation {
         final ActorSystem system = ActorSystem.create("system");
 
         final int[][] actorLinks = {
-            {0, 1, 1, 0},
-            {0, 0, 0, 1}, 
-            {1, 0, 0, 1}, 
-            {1, 0, 0, 1}
+            {0, 1, 1, 0, 0},
+            {0, 0, 0, 1, 0}, 
+            {1, 0, 0, 1, 0}, 
+            {1, 0, 0, 1, 0},
+            {1, 0, 1, 0, 1}
         };
 
         final ActorRef supervisor = system.actorOf(Supervisor.createActor(actorLinks), "sup");
 
-        supervisor.tell(new Start(), ActorRef.noSender());
+        supervisor.tell(new Topology(actorLinks), ActorRef.noSender());
 
         try {
             waitBeforeTerminate();

@@ -6,8 +6,8 @@ import akka.actor.ActorRef;
 import akka.actor.UntypedAbstractActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
-import slr203tp.messages.Start;
 import slr203tp.messages.Message;
+import slr203tp.messages.Topology;
 import slr203tp.messages.ActorsList;
 
 public class Supervisor extends UntypedAbstractActor {
@@ -30,15 +30,16 @@ public class Supervisor extends UntypedAbstractActor {
 
     @Override
     public void onReceive(Object message) throws Throwable {
-        if (message instanceof Start) {
-            actors.add(getContext().getSystem().actorOf(SampleActor.createActor(), "actor1"));
-            actors.add(getContext().getSystem().actorOf(SampleActor.createActor(), "actor2"));
-            actors.add(getContext().getSystem().actorOf(SampleActor.createActor(), "actor3"));
-            actors.add(getContext().getSystem().actorOf(SampleActor.createActor(), "actor4"));
+        if (message instanceof Topology) {
+            Topology top = (Topology) message;
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < top.numberOfActors; i++) {
+                actors.add(getContext().actorOf(SampleActor.createActor(), "actor" + Integer.toString(i+1)));
+            }
+
+            for (int i = 0; i < top.numberOfActors; i++) {
                 ActorsList list = new ActorsList();
-                for (int j = 0; j < 4; j++) {
+                for (int j = 0; j < top.numberOfActors; j++) {
                     if (actorLinks[i][j] == 1) {
                         list.addActor(actors.get(j));
                     }
