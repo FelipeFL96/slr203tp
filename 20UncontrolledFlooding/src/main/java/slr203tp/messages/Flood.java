@@ -1,8 +1,10 @@
 package slr203tp.messages;
 
-public class Flood {
+import java.io.Serializable;
 
-    private String message;
+public class Flood implements Serializable {
+
+    private final String message;
 
     public Flood(String message) {
         this.message = message;

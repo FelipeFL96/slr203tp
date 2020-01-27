@@ -6,7 +6,7 @@ import akka.actor.ActorRef;
 public class TransmissionMessage implements Serializable {
 
     public final Object message;
-    public ActorRef receiver;
+    public final ActorRef receiver;
 
     public TransmissionMessage(Object message, ActorRef actorRef) {
         this.message = message;

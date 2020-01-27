@@ -1,6 +1,8 @@
 package slr203tp.messages;
 
-public class GetPath {
+import java.io.Serializable;
+
+public class GetPath implements Serializable {
     
     public GetPath() {}
 

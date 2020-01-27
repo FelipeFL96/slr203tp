@@ -1,6 +1,8 @@
 package slr203tp.messages;
 
-public class FinishedTask {
+import java.io.Serializable;
+
+public class FinishedTask implements Serializable {
 
     public FinishedTask() {}
     

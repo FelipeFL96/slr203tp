@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>akka-patterns</groupId>
-    <artifactId>5-message-immutability-problem</artifactId>
+    <artifactId>14-load-balancer-round-robin</artifactId>
     <version>1.0</version>
 
     <properties>

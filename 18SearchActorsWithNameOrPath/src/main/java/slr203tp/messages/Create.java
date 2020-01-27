@@ -1,6 +1,8 @@
 package slr203tp.messages;
 
-public class Create {
+import java.io.Serializable;
+
+public class Create implements Serializable {
 
     public Create() {}
 

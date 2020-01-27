@@ -1,8 +1,10 @@
 package slr203tp.messages;
 
-public class Hello {
+import java.io.Serializable;
 
-    private String message = "Hello";
+public class Hello implements Serializable {
+
+    private final String message = "Hello";
 
     public Hello() {}
 

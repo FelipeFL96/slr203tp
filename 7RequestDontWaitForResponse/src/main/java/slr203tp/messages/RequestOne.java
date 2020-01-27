@@ -1,8 +1,11 @@
 package slr203tp.messages;
 
-public class RequestOne {
+
+import java.io.Serializable;
+
+public class RequestOne implements Serializable {
     
-    private String message;
+    private final String message;
 
     public RequestOne(String message) {
         this.message = message;

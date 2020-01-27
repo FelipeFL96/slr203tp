@@ -1,8 +1,10 @@
 package slr203tp.messages;
 
-public class ResponseTwo {
+import java.io.Serializable;
+
+public class ResponseTwo implements Serializable {
     
-    private String message;
+    private final String message;
 
     public ResponseTwo(String message) {
         this.message = message;

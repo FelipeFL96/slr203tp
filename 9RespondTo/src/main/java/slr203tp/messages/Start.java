@@ -1,8 +1,9 @@
 package slr203tp.messages;
 
-public class Start {
+import java.io.Serializable;
 
-    public Start() {
-    }
+public class Start implements Serializable {
+
+    public Start() {}
 
 }

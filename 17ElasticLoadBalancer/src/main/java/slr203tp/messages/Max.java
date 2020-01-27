@@ -1,8 +1,10 @@
 package slr203tp.messages;
 
-public class Max {
+import java.io.Serializable;
 
-    private int max;
+public class Max implements Serializable {
+
+    private final int max;
     
     public Max(int max) {
         this.max = max;

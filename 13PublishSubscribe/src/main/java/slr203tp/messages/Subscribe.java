@@ -1,6 +1,8 @@
 package slr203tp.messages;
 
-public class Subscribe {
+import java.io.Serializable;
+
+public class Subscribe implements Serializable {
 
     public Subscribe() {}
 

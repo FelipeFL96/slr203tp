@@ -1,11 +1,12 @@
 package slr203tp.messages;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import akka.actor.ActorRef;
 
-public class Hi2 {
+public class Hi2 implements Serializable {
 
-    private String message = "Hi again, friend!";
+    private final String message = "Hi again, friend!";
     private ArrayList<ActorRef> senders;
 
     public Hi2() {}

@@ -9,10 +9,10 @@ public class StoppingActors {
     public static void main(String[] args) {
     final ActorSystem system = ActorSystem.create("system");
 
-        final ActorRef a = system.actorOf(FirstActor.createActor(check), "a");
-        final ActorRef b = system.actorOf(FirstActor.createActor(check), "b");
-        final ActorRef c = system.actorOf(FirstActor.createActor(check), "c");
-        final ActorRef d = system.actorOf(FirstActor.createActor(check), "d");
+        final ActorRef a = system.actorOf(FirstActor.createActor(), "a");
+        final ActorRef b = system.actorOf(FirstActor.createActor(), "b");
+        final ActorRef c = system.actorOf(FirstActor.createActor(), "c");
+        final ActorRef d = system.actorOf(FirstActor.createActor(), "d");
         final ActorRef terminator = system.actorOf(Terminator.createActor(a, b, c, d), "terminator");
         
         terminator.tell(new Start(), ActorRef.noSender());

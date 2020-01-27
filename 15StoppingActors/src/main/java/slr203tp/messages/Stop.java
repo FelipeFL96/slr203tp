@@ -1,6 +1,8 @@
 package slr203tp.messages;
 
-public class Stop {
+import java.io.Serializable;
+
+public class Stop implements Serializable {
 
     public Stop() {}
 

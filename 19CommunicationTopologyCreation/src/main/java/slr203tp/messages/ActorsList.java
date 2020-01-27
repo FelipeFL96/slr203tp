@@ -1,11 +1,12 @@
 package slr203tp.messages;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import akka.actor.ActorRef;
 
-public class ActorsList {
+public class ActorsList implements Serializable {
 
-    private ArrayList<ActorRef> actorsList;
+    private final ArrayList<ActorRef> actorsList;
 
     public ActorsList() {
         this.actorsList = new ArrayList<ActorRef>();

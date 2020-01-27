@@ -1,8 +1,9 @@
 package slr203tp.messages;
 
+import java.io.Serializable;
 import akka.actor.ActorRef;
 
-public class SessionCreated {
+public class SessionCreated implements Serializable {
 
     private ActorRef session;
 

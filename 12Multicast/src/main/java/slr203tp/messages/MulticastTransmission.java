@@ -1,11 +1,12 @@
 package slr203tp.messages;
 
+import java.io.Serializable;
 import slr203tp.Group;
 
-public class MulticastTransmission {
+public class MulticastTransmission implements Serializable {
 
-    private Object message;
-    private Group receiverGroup;
+    private final Object message;
+    private final Group receiverGroup;
     
     public MulticastTransmission(Object message, Group receiverGroup) {
         this.message = message;

@@ -1,8 +1,10 @@
 package slr203tp.messages;
 
-public class Task {
+import java.io.Serializable;
 
-    private String task;
+public class Task implements Serializable {
+
+    private final String task;
     
     public Task(String task) {
         this.task = task;

@@ -1,6 +1,8 @@
 package slr203tp.messages;
 
-public class ReturnPath {
+import java.io.Serializable;
+
+public class ReturnPath implements Serializable {
 
     public ReturnPath() {}
 

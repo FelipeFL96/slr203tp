@@ -1,6 +1,8 @@
 package slr203tp.messages;
 
-public class Unjoin {
+import java.io.Serializable;
+
+public class Unjoin implements Serializable {
 
     public Unjoin() {}
     

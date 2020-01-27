@@ -1,6 +1,8 @@
 package slr203tp.messages;
 
-public class Join {
+import java.io.Serializable;
+
+public class Join implements Serializable {
 
     public Join() {}
 
