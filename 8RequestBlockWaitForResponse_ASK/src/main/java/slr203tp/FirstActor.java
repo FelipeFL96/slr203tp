@@ -14,7 +14,6 @@ import static akka.pattern.Patterns.ask;
 import static akka.pattern.Patterns.pipe;
 import java.util.concurrent.CompletableFuture;
 import java.time.Duration;
-import java.xml.transform.Result;
 
 public class FirstActor extends UntypedAbstractActor {
 
